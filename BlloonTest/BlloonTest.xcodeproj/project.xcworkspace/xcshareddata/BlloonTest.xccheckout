@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>906D3A89-9393-46E5-9DC1-14A07C037463</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BlloonTest</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AF0CFCAF-A6D4-41AA-BF94-62C1D949600B</key>
+		<string>https://github.com/Krizai/BlloonTest.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BlloonTest/BlloonTest.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AF0CFCAF-A6D4-41AA-BF94-62C1D949600B</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Krizai/BlloonTest.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AF0CFCAF-A6D4-41AA-BF94-62C1D949600B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AF0CFCAF-A6D4-41AA-BF94-62C1D949600B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BlloonTest</string>
+		</dict>
+	</array>
+</dict>
+</plist>
