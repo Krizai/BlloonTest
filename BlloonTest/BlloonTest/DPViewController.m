@@ -8,7 +8,7 @@
 
 #import "DPViewController.h"
 
-@interface DPViewController ()
+@interface DPViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
 
