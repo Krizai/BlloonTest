@@ -24,7 +24,10 @@
 		94F4FABA19C364D400CC6537 /* BlloonTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4FAB919C364D400CC6537 /* BlloonTestTests.m */; };
 		94F4FB0C19C3773E00CC6537 /* DPBookViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4FB0B19C3773E00CC6537 /* DPBookViewCell.m */; };
 		94F4FB1019C3803100CC6537 /* blloon.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94F4FB0E19C3803100CC6537 /* blloon.xcdatamodeld */; };
-		94F4FB1319C380DF00CC6537 /* DPBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4FB1219C380DF00CC6537 /* DPBook.m */; };
+		94F4FB1719C3816E00CC6537 /* DPBookLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4FB1619C3816E00CC6537 /* DPBookLoader.m */; };
+		94F4FB3E19C4B14600CC6537 /* DPCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4FB3D19C4B14600CC6537 /* DPCategory.m */; };
+		94F4FB4119C4B14600CC6537 /* DPBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4FB4019C4B14600CC6537 /* DPBook.m */; };
+		94F4FB4519C4C4A400CC6537 /* NSDictionary+ClassGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4FB4419C4C4A400CC6537 /* NSDictionary+ClassGetter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,8 +64,14 @@
 		94F4FB0A19C3773E00CC6537 /* DPBookViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPBookViewCell.h; sourceTree = "<group>"; };
 		94F4FB0B19C3773E00CC6537 /* DPBookViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPBookViewCell.m; sourceTree = "<group>"; };
 		94F4FB0F19C3803100CC6537 /* blloon.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = blloon.xcdatamodel; sourceTree = "<group>"; };
-		94F4FB1119C380DF00CC6537 /* DPBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DPBook.h; path = ../DPBook.h; sourceTree = "<group>"; };
-		94F4FB1219C380DF00CC6537 /* DPBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DPBook.m; path = ../DPBook.m; sourceTree = "<group>"; };
+		94F4FB1519C3816E00CC6537 /* DPBookLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPBookLoader.h; sourceTree = "<group>"; };
+		94F4FB1619C3816E00CC6537 /* DPBookLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPBookLoader.m; sourceTree = "<group>"; };
+		94F4FB3C19C4B14600CC6537 /* DPCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPCategory.h; sourceTree = "<group>"; };
+		94F4FB3D19C4B14600CC6537 /* DPCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPCategory.m; sourceTree = "<group>"; };
+		94F4FB3F19C4B14600CC6537 /* DPBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPBook.h; sourceTree = "<group>"; };
+		94F4FB4019C4B14600CC6537 /* DPBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DPBook.m; sourceTree = "<group>"; };
+		94F4FB4319C4C4A400CC6537 /* NSDictionary+ClassGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ClassGetter.h"; sourceTree = "<group>"; };
+		94F4FB4419C4C4A400CC6537 /* NSDictionary+ClassGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ClassGetter.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +131,8 @@
 		94F4FA9119C364D400CC6537 /* BlloonTest */ = {
 			isa = PBXGroup;
 			children = (
+				94F4FB4219C4C49800CC6537 /* Utils */,
+				94F4FB1419C3815300CC6537 /* Network */,
 				94F4FB0D19C3800900CC6537 /* Model */,
 				94F4FB0619C3763900CC6537 /* Views */,
 				94F4FB0519C3763200CC6537 /* Controllers */,
@@ -186,10 +197,30 @@
 			isa = PBXGroup;
 			children = (
 				94F4FB0E19C3803100CC6537 /* blloon.xcdatamodeld */,
-				94F4FB1119C380DF00CC6537 /* DPBook.h */,
-				94F4FB1219C380DF00CC6537 /* DPBook.m */,
+				94F4FB3F19C4B14600CC6537 /* DPBook.h */,
+				94F4FB4019C4B14600CC6537 /* DPBook.m */,
+				94F4FB3C19C4B14600CC6537 /* DPCategory.h */,
+				94F4FB3D19C4B14600CC6537 /* DPCategory.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		94F4FB1419C3815300CC6537 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				94F4FB1519C3816E00CC6537 /* DPBookLoader.h */,
+				94F4FB1619C3816E00CC6537 /* DPBookLoader.m */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		94F4FB4219C4C49800CC6537 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				94F4FB4319C4C4A400CC6537 /* NSDictionary+ClassGetter.h */,
+				94F4FB4419C4C4A400CC6537 /* NSDictionary+ClassGetter.m */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,12 +322,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94F4FB1319C380DF00CC6537 /* DPBook.m in Sources */,
+				94F4FB1719C3816E00CC6537 /* DPBookLoader.m in Sources */,
 				94F4FA9C19C364D400CC6537 /* DPAppDelegate.m in Sources */,
+				94F4FB4119C4B14600CC6537 /* DPBook.m in Sources */,
 				94F4FB0C19C3773E00CC6537 /* DPBookViewCell.m in Sources */,
 				94F4FB1019C3803100CC6537 /* blloon.xcdatamodeld in Sources */,
 				94F4FAA519C364D400CC6537 /* DPViewController.m in Sources */,
 				94F4FA9819C364D400CC6537 /* main.m in Sources */,
+				94F4FB4519C4C4A400CC6537 /* NSDictionary+ClassGetter.m in Sources */,
+				94F4FB3E19C4B14600CC6537 /* DPCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,8 +4,15 @@
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbnailUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="books" inverseEntity="Category" syncable="YES"/>
+    </entity>
+    <entity name="Category" representedClassName="DPCategory" syncable="YES">
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="onlineId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Book" inverseName="category" inverseEntity="Book" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Book" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Book" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Category" positionX="-54" positionY="18" width="128" height="88"/>
     </elements>
 </model>
