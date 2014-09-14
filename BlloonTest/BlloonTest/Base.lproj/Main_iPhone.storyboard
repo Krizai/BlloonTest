@@ -7,7 +7,7 @@
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="DPViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="DPViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -111,6 +111,8 @@
                             <constraint firstItem="J7r-bI-3Mb" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="pNN-Is-Rhn"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="J7r-bI-3Mb" id="kUG-31-P1Q"/>
                         <outlet property="progressIndicator" destination="mch-3W-Qze" id="IIG-aV-x1q"/>

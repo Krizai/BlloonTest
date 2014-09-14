@@ -11,7 +11,8 @@
 #import "DPCategory.h"
 #import <CoreData/CoreData.h>
 
-static const NSInteger pageItemsCount = 20;
+static const NSInteger pageItemsCountIPhone = 20;
+static const NSInteger pageItemsCountIPad = 100;
 static const NSInteger cacheLiveTime = 60*60*24;
 
 @interface DPBookLoader ()
@@ -19,6 +20,8 @@ static const NSInteger cacheLiveTime = 60*60*24;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+@property (assign, nonatomic) NSInteger pageItemsCount;
 
 @end
 
@@ -51,6 +54,7 @@ static const NSInteger cacheLiveTime = 60*60*24;
         _managedObjectContext = [[NSManagedObjectContext alloc] init];
         [_managedObjectContext setPersistentStoreCoordinator:_persistentStoreCoordinator];
         
+        self.pageItemsCount = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? pageItemsCountIPad : pageItemsCountIPhone;
         
     }
     return self;
@@ -96,8 +100,8 @@ static const NSInteger cacheLiveTime = 60*60*24;
                                page:(NSUInteger) page{
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Book"];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"category = %@", category]];
-    [fetchRequest setFetchLimit:pageItemsCount];
-    [fetchRequest setFetchOffset:pageItemsCount*(page-1)];
+    [fetchRequest setFetchLimit:self.pageItemsCount];
+    [fetchRequest setFetchOffset:self.pageItemsCount*(page-1)];
     return [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
 }
 
@@ -122,13 +126,15 @@ static const NSInteger cacheLiveTime = 60*60*24;
 
 
 - (void)resetCategoryCacheIfNeeded:(DPCategory*) category{
-    if(!category || [category.lastUpdate timeIntervalSinceNow] < cacheLiveTime){
+    if(!category || (-[category.lastUpdate timeIntervalSinceNow]) < cacheLiveTime){
         return;
     }
     [category removeBooks:category.books];
     [self.managedObjectContext save:nil];
 }
 
+
+#pragma mark Networking
 - (BOOL)loadBooksForCategory:(DPCategory*) category
                         page:(NSUInteger) page{
     NSURL* url = [self booksUrlForCategoryId:category.onlineId page:page];
@@ -148,6 +154,7 @@ static const NSInteger cacheLiveTime = 60*60*24;
     return YES;
 }
 
+#pragma mark Parsing
 
 - (void)parseBooksFromJSONArray:(NSArray*) jsonArray toCategory:(DPCategory*) category {
     for(NSDictionary* jsonDictionary in jsonArray){
@@ -160,7 +167,7 @@ static const NSInteger cacheLiveTime = 60*60*24;
 
 - (NSURL*) booksUrlForCategoryId:(NSString*) categoryId page:(NSUInteger) page{
     NSDictionary* arguments = @{@"page": [NSString stringWithFormat:@"%d",page],
-                                @"per_page":  [NSString stringWithFormat:@"%d",pageItemsCount],
+                                @"per_page":  [NSString stringWithFormat:@"%d",self.pageItemsCount],
                                 };
 
     NSString* booksPath = [NSString stringWithFormat:@"http://turbine-production-eu.herokuapp.com:80/categories/%@/books", categoryId];
