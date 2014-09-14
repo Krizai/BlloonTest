@@ -17,7 +17,10 @@ static const NSString* categoryId = @"Wma8RpqpC6UcWye2U8qUg-6a21w";
 
 @property (strong, nonatomic) NSMutableArray* books;
 @property (assign, nonatomic) NSUInteger lastPageLoaded;
+@property (assign, nonatomic) BOOL additionalDataAvailable;
+@property (assign, nonatomic) BOOL pageLoadingInProgress;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *progressIndicator;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @end
 
@@ -26,6 +29,9 @@ static const NSString* categoryId = @"Wma8RpqpC6UcWye2U8qUg-6a21w";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.additionalDataAvailable = YES;
+    self.lastPageLoaded = 0;
+    [self switchToLoadingState:YES];
     [self loadPage:1];
 }
 
@@ -36,16 +42,27 @@ static const NSString* categoryId = @"Wma8RpqpC6UcWye2U8qUg-6a21w";
 }
 
 #pragma  mark Data Loading
+- (void)switchToLoadingState:(BOOL) loadingState{
+    self.progressIndicator.hidden = !loadingState;
+    self.collectionView.hidden = loadingState;
+}
+
 - (void)loadPage:(NSUInteger) page{
+    self.pageLoadingInProgress = YES;
     [[DPBookLoader sharedInstance] booksForCategoryOnlineId:categoryId
                                                        page:self.lastPageLoaded + 1
-                                          complitionHandler:^(NSArray *books, NSUInteger page) {
+                                          complitionHandler:^(NSArray *books, NSUInteger page, BOOL success) {
+                                              [self switchToLoadingState:NO];
                                               self.lastPageLoaded = page;
-                                              if(!self.books){
-                                                  self.books = [NSMutableArray new];
+                                              if(success){
+                                                  self.additionalDataAvailable = books.count > 0;
+                                                  if(!self.books){
+                                                      self.books = [NSMutableArray new];
+                                                  }
+                                                  [self.books addObjectsFromArray:books];
+                                                  [self.collectionView reloadData];
                                               }
-                                              [self.books addObjectsFromArray:books];
-                                              [self.collectionView reloadData];
+                                              self.pageLoadingInProgress = NO;
                                           }];
 }
 
@@ -66,6 +83,17 @@ static const NSString* categoryId = @"Wma8RpqpC6UcWye2U8qUg-6a21w";
     }else{
         return nil;
         
+    }
+}
+
+
+#pragma mark UITableViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(self.pageLoadingInProgress || !self.additionalDataAvailable) return;
+
+    if (scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.size.height - 100) {
+        [self loadPage:self.lastPageLoaded+1];
     }
 }
 

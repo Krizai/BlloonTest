@@ -60,7 +60,7 @@ static const NSInteger cacheLiveTime = 60*60*24;
 
 - (void)booksForCategoryOnlineId:(NSString*) onlineId
                             page:(NSUInteger) page
-               complitionHandler:(void (^)(NSArray* items, NSUInteger page)) handler{
+               complitionHandler:(void (^)(NSArray* items, NSUInteger page, BOOL success)) handler{
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         DPCategory* category = [self cachedCategoryByOnlineId:onlineId];
@@ -73,11 +73,17 @@ static const NSInteger cacheLiveTime = 60*60*24;
         
         NSArray* books = [self cachedBooksForCategory:category page:page];
         if(books.count == 0){
-            [self loadBooksForCategory:category page:page];
+            BOOL success = [self loadBooksForCategory:category page:page];
+            if(!success){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    handler(books, page, NO);
+                });
+                return;
+            }
             books = [self cachedBooksForCategory:category page:page];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            handler(books, page);
+            handler(books, page, YES);
         });
         
     });
@@ -123,10 +129,14 @@ static const NSInteger cacheLiveTime = 60*60*24;
     [self.managedObjectContext save:nil];
 }
 
-- (void)loadBooksForCategory:(DPCategory*) category
+- (BOOL)loadBooksForCategory:(DPCategory*) category
                         page:(NSUInteger) page{
     NSURL* url = [self booksUrlForCategoryId:category.onlineId page:page];
     NSData* data = [NSData dataWithContentsOfURL:url];
+    if(!data){
+        return NO;
+    }
+    
     NSArray* jsonArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     [self parseBooksFromJSONArray:jsonArray toCategory:category];
 
@@ -135,6 +145,7 @@ static const NSInteger cacheLiveTime = 60*60*24;
     }
 
     [self.managedObjectContext save:nil];
+    return YES;
 }
 
 

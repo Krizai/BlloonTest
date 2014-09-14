@@ -14,6 +14,5 @@
 
 - (void)booksForCategoryOnlineId:(NSString*) onlineId
                             page:(NSUInteger) page
-               complitionHandler:(void (^)(NSArray* items, NSUInteger page)) handler;
-
+               complitionHandler:(void (^)(NSArray* items, NSUInteger page, BOOL success)) handler;
 @end

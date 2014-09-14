@@ -10,6 +10,8 @@
 @interface DPImageLoader ()
 
 @property ( nonatomic, retain) NSMutableDictionary* memoryCache;
+@property ( nonatomic, retain) NSOperationQueue* loadingQueue;
+
 @end
 
 @implementation DPImageLoader
@@ -18,6 +20,8 @@
 {
     self = [super init];
     if (self) {
+        _loadingQueue = [NSOperationQueue new];
+        _loadingQueue.maxConcurrentOperationCount = 10;
         _memoryCache = [NSMutableDictionary new];
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationDidReceiveMemoryWarning:)
@@ -44,7 +48,7 @@
 }
 
 - (void) loadImageWithURL:(NSString*) urlString complitionHandler:(void(^)(UIImage* result, NSString* url))complitionHandler{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    [_loadingQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
         UIImage* resultImage = self.memoryCache[urlString];
         if (resultImage) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -62,13 +66,15 @@
         }
         
         resultImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]]];
-        self.memoryCache[urlString] = resultImage;
-        [self saveToDiscCacheImage:resultImage withUrl:urlString];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            complitionHandler(resultImage, urlString);
-        });
-    });
+        if(resultImage){
+            self.memoryCache[urlString] = resultImage;
+            [self saveToDiscCacheImage:resultImage withUrl:urlString];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                complitionHandler(resultImage, urlString);
+            });
+        }
+    }]];
 
 }
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
