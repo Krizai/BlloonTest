@@ -8,9 +8,10 @@
 
 #import "DPBookViewCell.h"
 #import "DPBook.h"
+#import "DPOnlineImageView.h"
 
 @interface DPBookViewCell ()
-@property (weak, nonatomic) IBOutlet UIImageView *thumbnailView;
+@property (weak, nonatomic) IBOutlet DPOnlineImageView *thumbnailView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 
@@ -21,6 +22,7 @@
 - (void) setupWithBook:(DPBook*) book{
     self.titleLabel.text = book.title;
     self.authorLabel.text = book.author;
+    self.thumbnailView.urlString = book.thumbnailUrl;
     
 }
 

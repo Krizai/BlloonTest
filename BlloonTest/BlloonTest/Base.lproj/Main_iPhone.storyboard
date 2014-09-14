@@ -34,35 +34,46 @@
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eKg-ME-Mm1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="140" height="93"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eKg-ME-Mm1" customClass="DPOnlineImageView">
+                                                    <rect key="frame" x="0.0" y="5" width="140" height="90"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="90" id="zfp-ED-aD8"/>
+                                                    </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5M-mH-eVT">
-                                                    <rect key="frame" x="71" y="121" width="42" height="21"/>
+                                                    <rect key="frame" x="5" y="120" width="135" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="pNK-OT-BRV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmA-ZY-3Og">
-                                                    <rect key="frame" x="54" y="99" width="42" height="21"/>
+                                                    <rect key="frame" x="5" y="100" width="135" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="5ye-sG-FNh"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="FmA-ZY-3Og" secondAttribute="bottom" constant="20" id="3ra-9U-mdR"/>
+                                            <constraint firstAttribute="trailing" secondItem="U5M-mH-eVT" secondAttribute="trailing" id="1EY-lE-Odx"/>
                                             <constraint firstItem="eKg-ME-Mm1" firstAttribute="leading" secondItem="td7-Mt-WjH" secondAttribute="leading" id="5mG-qh-u7s"/>
-                                            <constraint firstItem="eKg-ME-Mm1" firstAttribute="top" secondItem="td7-Mt-WjH" secondAttribute="top" id="DkP-kv-Bds"/>
-                                            <constraint firstItem="U5M-mH-eVT" firstAttribute="top" secondItem="FmA-ZY-3Og" secondAttribute="bottom" constant="1" id="IHE-tX-sVd"/>
-                                            <constraint firstItem="FmA-ZY-3Og" firstAttribute="leading" secondItem="td7-Mt-WjH" secondAttribute="leading" constant="54" id="O3Y-ZA-FVb"/>
+                                            <constraint firstItem="U5M-mH-eVT" firstAttribute="leading" secondItem="td7-Mt-WjH" secondAttribute="leading" constant="5" id="6kp-k4-xl1"/>
+                                            <constraint firstItem="eKg-ME-Mm1" firstAttribute="top" secondItem="td7-Mt-WjH" secondAttribute="top" constant="5" id="DkP-kv-Bds"/>
                                             <constraint firstAttribute="trailing" secondItem="eKg-ME-Mm1" secondAttribute="trailing" id="PAZ-vp-7L7"/>
-                                            <constraint firstItem="FmA-ZY-3Og" firstAttribute="top" secondItem="eKg-ME-Mm1" secondAttribute="bottom" constant="6" id="bEd-rc-HdP"/>
-                                            <constraint firstItem="U5M-mH-eVT" firstAttribute="leading" secondItem="td7-Mt-WjH" secondAttribute="leading" constant="71" id="ldl-UV-qrr"/>
+                                            <constraint firstAttribute="bottom" secondItem="U5M-mH-eVT" secondAttribute="bottom" id="Vfi-8f-r68"/>
+                                            <constraint firstAttribute="trailing" secondItem="FmA-ZY-3Og" secondAttribute="trailing" id="WGV-Pf-PFg"/>
+                                            <constraint firstItem="U5M-mH-eVT" firstAttribute="top" secondItem="FmA-ZY-3Og" secondAttribute="bottom" id="WIY-KV-dta"/>
+                                            <constraint firstItem="FmA-ZY-3Og" firstAttribute="leading" secondItem="td7-Mt-WjH" secondAttribute="leading" constant="5" id="dV8-nm-TWi"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="authorLabel" destination="U5M-mH-eVT" id="Ihr-Kp-186"/>
@@ -77,7 +88,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="J7r-bI-3Mb" secondAttribute="bottom" id="Q6z-oc-yjE"/>
                             <constraint firstItem="J7r-bI-3Mb" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="SiE-NZ-c2w"/>
