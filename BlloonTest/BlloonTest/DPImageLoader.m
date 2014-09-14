@@ -48,33 +48,52 @@
 }
 
 - (void) loadImageWithURL:(NSString*) urlString complitionHandler:(void(^)(UIImage* result, NSString* url))complitionHandler{
-    [_loadingQueue addOperation:[NSBlockOperation blockOperationWithBlock:^{
-        UIImage* resultImage = self.memoryCache[urlString];
-        if (resultImage) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                complitionHandler(resultImage, urlString);
-            });
-            return;
-        }
+    UIImage* resultImage = nil;
+    @synchronized(self){
+        resultImage = self.memoryCache[urlString];
+    }
+    if (resultImage) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            complitionHandler(resultImage, urlString);
+        });
+        return;
+    }
+
+    NSBlockOperation* networkLoadingOperation = [NSBlockOperation blockOperationWithBlock:^{
         
-        resultImage = [self loadFromDiscCacheImageWithUrl:urlString];
-        if (resultImage) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                complitionHandler(resultImage, urlString);
-            });
-            return;
-        }
-        
-        resultImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]]];
+        UIImage* resultImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]]];
         if(resultImage){
-            self.memoryCache[urlString] = resultImage;
+            @synchronized(self){
+                self.memoryCache[urlString] = resultImage;
+            }
             [self saveToDiscCacheImage:resultImage withUrl:urlString];
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 complitionHandler(resultImage, urlString);
             });
         }
-    }]];
+    }];
+    networkLoadingOperation.queuePriority = NSOperationQueuePriorityNormal;
+
+    NSBlockOperation* diskCacheLoadingOperation = [NSBlockOperation blockOperationWithBlock:^{
+        
+        UIImage* resultImage = [self loadFromDiscCacheImageWithUrl:urlString];
+        if (resultImage) {
+            @synchronized(self){
+                self.memoryCache[urlString] = resultImage;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                complitionHandler(resultImage, urlString);
+            });
+            return;
+        }
+        [_loadingQueue addOperation:networkLoadingOperation];
+
+        
+    }];
+    diskCacheLoadingOperation.queuePriority = NSOperationQueuePriorityHigh;
+
+    [_loadingQueue addOperation:diskCacheLoadingOperation];
 
 }
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
@@ -106,6 +125,7 @@
     return path;
 }
 
+#pragma mark Utility 
 
 -(NSString *) filterPathForFilename:(NSString*) path{
 	int length = [path length];

@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "BlloonTest/DPViewController.m"
-            timestampString = "432411920.966147"
+            filePath = "BlloonTest/DPImageLoader.m"
+            timestampString = "432420774.203756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "-setAdditionalDataAvailable:"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "-applicationDidReceiveMemoryWarning:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

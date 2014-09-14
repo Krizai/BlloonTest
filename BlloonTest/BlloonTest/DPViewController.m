@@ -29,6 +29,7 @@ static const NSString* categoryId = @"Wma8RpqpC6UcWye2U8qUg-6a21w";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.collectionView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0);
     self.additionalDataAvailable = YES;
     self.lastPageLoaded = 0;
     [self switchToLoadingState:YES];
@@ -59,8 +60,14 @@ static const NSString* categoryId = @"Wma8RpqpC6UcWye2U8qUg-6a21w";
                                                   if(!self.books){
                                                       self.books = [NSMutableArray new];
                                                   }
+                                                  NSInteger oldCount = self.books.count;
                                                   [self.books addObjectsFromArray:books];
-                                                  [self.collectionView reloadData];
+                                                  [self.collectionView performBatchUpdates:^{
+                                                      for(int i = 0; i < books.count; i++){
+                                                          [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:oldCount + i  inSection:0]]];
+                                                      }
+                                                  } completion:^(BOOL finished) {
+                                                  }];
                                               }
                                               self.pageLoadingInProgress = NO;
                                           }];
