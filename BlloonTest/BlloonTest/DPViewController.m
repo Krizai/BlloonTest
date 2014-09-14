@@ -8,6 +8,8 @@
 
 #import "DPViewController.h"
 #import "DPBookLoader.h"
+#import "DPBook.h"
+#import "DPBookViewCell.h"
 
 static const NSString* categoryId = @"Wma8RpqpC6UcWye2U8qUg-6a21w";
 
@@ -38,20 +40,33 @@ static const NSString* categoryId = @"Wma8RpqpC6UcWye2U8qUg-6a21w";
     [[DPBookLoader sharedInstance] booksForCategoryOnlineId:categoryId
                                                        page:self.lastPageLoaded + 1
                                           complitionHandler:^(NSArray *books, NSUInteger page) {
-        self.lastPageLoaded = page;
-        [self.books addObjectsFromArray:books];
-        [self.collectionView reloadData];
-    }];
+                                              self.lastPageLoaded = page;
+                                              if(!self.books){
+                                                  self.books = [NSMutableArray new];
+                                              }
+                                              [self.books addObjectsFromArray:books];
+                                              [self.collectionView reloadData];
+                                          }];
 }
 
 
 #pragma mark UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 0;
+    return self.books.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    return nil;
+    if(indexPath.row < self.books.count){
+        static NSString *cellIdentifier = @"BookCell";
+        DPBookViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+        
+        DPBook* book = self.books[indexPath.row];
+        [cell setupWithBook:book];
+        return cell;
+    }else{
+        return nil;
+        
+    }
 }
 
 

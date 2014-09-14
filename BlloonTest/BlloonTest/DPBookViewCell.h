@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+
+@class DPBook;
 @interface DPBookViewCell : UICollectionViewCell
+
+- (void) setupWithBook:(DPBook*) book;
 
 @end

@@ -16,9 +16,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J7r-bI-3Mb">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J7r-bI-3Mb">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Npb-OW-FK9">
                                     <size key="itemSize" width="140" height="140"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -26,25 +27,25 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="td7-Mt-WjH" customClass="DPBookViewCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BookCell" id="td7-Mt-WjH" customClass="DPBookViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eKg-ME-Mm1">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eKg-ME-Mm1">
                                                     <rect key="frame" x="0.0" y="0.0" width="140" height="93"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5M-mH-eVT">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5M-mH-eVT">
                                                     <rect key="frame" x="71" y="121" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmA-ZY-3Og">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmA-ZY-3Og">
                                                     <rect key="frame" x="54" y="99" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -53,6 +54,16 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="FmA-ZY-3Og" secondAttribute="bottom" constant="20" id="3ra-9U-mdR"/>
+                                            <constraint firstItem="eKg-ME-Mm1" firstAttribute="leading" secondItem="td7-Mt-WjH" secondAttribute="leading" id="5mG-qh-u7s"/>
+                                            <constraint firstItem="eKg-ME-Mm1" firstAttribute="top" secondItem="td7-Mt-WjH" secondAttribute="top" id="DkP-kv-Bds"/>
+                                            <constraint firstItem="U5M-mH-eVT" firstAttribute="top" secondItem="FmA-ZY-3Og" secondAttribute="bottom" constant="1" id="IHE-tX-sVd"/>
+                                            <constraint firstItem="FmA-ZY-3Og" firstAttribute="leading" secondItem="td7-Mt-WjH" secondAttribute="leading" constant="54" id="O3Y-ZA-FVb"/>
+                                            <constraint firstAttribute="trailing" secondItem="eKg-ME-Mm1" secondAttribute="trailing" id="PAZ-vp-7L7"/>
+                                            <constraint firstItem="FmA-ZY-3Og" firstAttribute="top" secondItem="eKg-ME-Mm1" secondAttribute="bottom" constant="6" id="bEd-rc-HdP"/>
+                                            <constraint firstItem="U5M-mH-eVT" firstAttribute="leading" secondItem="td7-Mt-WjH" secondAttribute="leading" constant="71" id="ldl-UV-qrr"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="authorLabel" destination="U5M-mH-eVT" id="Ihr-Kp-186"/>
                                             <outlet property="thumbnailView" destination="eKg-ME-Mm1" id="kzN-J8-uko"/>
@@ -67,6 +78,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="J7r-bI-3Mb" secondAttribute="bottom" id="Q6z-oc-yjE"/>
+                            <constraint firstItem="J7r-bI-3Mb" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="SiE-NZ-c2w"/>
+                            <constraint firstAttribute="trailing" secondItem="J7r-bI-3Mb" secondAttribute="trailing" id="fUN-sS-LP6"/>
+                            <constraint firstItem="J7r-bI-3Mb" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="pNN-Is-Rhn"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="J7r-bI-3Mb" id="kUG-31-P1Q"/>

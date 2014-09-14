@@ -7,6 +7,7 @@
 //
 
 #import "DPBookViewCell.h"
+#import "DPBook.h"
 
 @interface DPBookViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnailView;
@@ -17,22 +18,10 @@
 
 @implementation DPBookViewCell
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+- (void) setupWithBook:(DPBook*) book{
+    self.titleLabel.text = book.title;
+    self.authorLabel.text = book.author;
+    
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end
