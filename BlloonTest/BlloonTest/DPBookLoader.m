@@ -76,7 +76,7 @@ static const NSInteger cacheLiveTime = 60*60*24;
             BOOL success = [self loadBooksForCategory:category page:page];
             if(!success){
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    handler(books, page, NO);
+                    handler(nil, page, NO);
                 });
                 return;
             }

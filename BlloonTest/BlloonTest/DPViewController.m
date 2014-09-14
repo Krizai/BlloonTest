@@ -53,8 +53,8 @@ static const NSString* categoryId = @"Wma8RpqpC6UcWye2U8qUg-6a21w";
                                                        page:self.lastPageLoaded + 1
                                           complitionHandler:^(NSArray *books, NSUInteger page, BOOL success) {
                                               [self switchToLoadingState:NO];
-                                              self.lastPageLoaded = page;
                                               if(success){
+                                                  self.lastPageLoaded = page;
                                                   self.additionalDataAvailable = books.count > 0;
                                                   if(!self.books){
                                                       self.books = [NSMutableArray new];
